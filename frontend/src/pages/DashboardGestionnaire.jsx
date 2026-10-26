@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import api from '../services/api';
+import api from '../contexts/services/api';
 import toast from 'react-hot-toast';
 import SignalementsTab from './gestionnaire/SignalementsTab';
 import CoupuresTab from './gestionnaire/CoupuresTab';

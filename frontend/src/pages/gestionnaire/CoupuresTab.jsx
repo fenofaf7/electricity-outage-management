@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import api from '../../services/api';
+import api from '../../contexts/services/api';
 import toast from 'react-hot-toast';
 
 function CoupuresTab({ coupuresEnCours, coupuresResolues, quartiers, onCreerCoupure, onResoudreCoupure, getAuthHeaders, chargerDonnees }) {

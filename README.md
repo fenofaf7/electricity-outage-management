@@ -97,6 +97,26 @@ Le backend comprend des modules dédiés à l'analyse et à l'optimisation :
 - Arbre de décision : analyse et classification.
 - Modules de prédiction : estimation des risques de coupure.
 
+## Captures d'écran
+
+### Tableau de bord
+![Tableau de bord](docs/screenshots/dashboard.png)
+
+### Carte interactive
+![Carte des coupures](docs/screenshots/carte-interactive.png)
+
+### Gestion des coupures
+![Gestion des coupures](docs/screenshots/gestion-coupures.png)
+
+### Analyse et prédiction
+![Prédictions](docs/screenshots/predictions.png)
+
+### Administration
+![Administration](docs/screenshots/administration.png)
+
+### Authentification
+![Connexion](docs/screenshots/connexion.png)
+
 ## Installation
 
 ### Prérequis

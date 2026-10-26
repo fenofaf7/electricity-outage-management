@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { statistiqueService } from '../services/statistiqueService';
+import { statistiqueService } from '../contexts/services/statistiqueService';
 import {
   Chart as ChartJS,
   CategoryScale,

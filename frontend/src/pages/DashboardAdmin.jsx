@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import api from '../services/api';
+import api from '../contexts/services/api';
 import {
   Chart as ChartJS,
   CategoryScale,
