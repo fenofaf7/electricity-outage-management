@@ -42,7 +42,7 @@ def get_all_rapports(
 def create_rapport(
     rapport: RapportCreate,
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)  # ← modifié
+    current_user = Depends(get_current_analyste)  # ← modifié
 ):
     """Crée un nouveau rapport (analyste ou admin)"""
     new_rapport = Rapport(
@@ -62,7 +62,7 @@ def create_rapport(
 def publier_rapport(
     rapport_id: int,
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
+    current_user = Depends(get_current_analyste)
 ):
     """Publie un rapport (change statut de brouillon à publie)"""
     rapport = db.query(Rapport).filter(Rapport.id_rapport == rapport_id).first()

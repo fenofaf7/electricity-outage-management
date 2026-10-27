@@ -39,6 +39,12 @@ async def get_current_user(
             detail="Utilisateur non trouvé"
         )
 
+    if user.statut != "actif":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Compte inactif ou suspendu"
+        )
+
     return user
 
 async def get_current_admin(

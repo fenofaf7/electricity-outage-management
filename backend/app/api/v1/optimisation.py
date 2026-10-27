@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.algorithms.glouton_db import GestionDelestageDB
-from app.api.deps import get_current_user
+from app.api.deps import get_current_user, get_current_gestionnaire
 
 router = APIRouter(prefix="/optimisation", tags=["Optimisation"])
 
@@ -12,7 +12,7 @@ def planifier_delestage(
     puissance_disponible: float = Query(..., description="Puissance disponible en MW"),
     puissance_securite: float = Query(10, description="Marge de sécurité en MW"),
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
+    current_user = Depends(get_current_gestionnaire)
 ):
     """Planifie le délestage (algorithme glouton)"""
 
@@ -25,7 +25,7 @@ def optimiser_delestage(
     puissance_disponible: float = Query(..., description="Puissance disponible en MW"),
     duree_max: int = Query(120, description="Durée max par quartier en minutes"),
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
+    current_user = Depends(get_current_gestionnaire)
 ):
     """Optimise le délestage avec rotation"""
 

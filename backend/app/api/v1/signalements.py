@@ -22,7 +22,7 @@ def get_all_signalements(
     skip: int = 0,
     limit: int = 100,
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
+    current_user = Depends(get_current_gestionnaire)
 ):
     signalements = db.query(Signalement).offset(skip).limit(limit).all()
     return signalements
@@ -48,7 +48,7 @@ def create_signalement(
         # Créer le signalement
         nouveau_signalement = Signalement(
             id_quartier=signalement.id_quartier,
-            id_citoyen=signalement.id_citoyen or current_user.id_utilisateur,
+            id_citoyen=current_user.id_utilisateur,
             description=signalement.description,
             type_signalement=signalement.type_signalement,
             statut="en_attente"
@@ -148,10 +148,33 @@ def get_signalement(
     db: Session = Depends(get_db),
     current_user = Depends(get_current_user)
 ):
-    signalement = db.query(Signalement).filter(Signalement.id_signalement == signalement_id).first()
+    signalement = (
+        db.query(Signalement)
+        .filter(Signalement.id_signalement == signalement_id)
+        .first()
+    )
+
     if not signalement:
-        raise HTTPException(status_code=404, detail="Signalement non trouvé")
-    return signalement
+        raise HTTPException(
+            status_code=404,
+            detail="Signalement non trouvé"
+        )
+
+    role = current_user.role.nom_role
+
+    if role in ["administrateur", "gestionnaire_coupure"]:
+        return signalement
+
+    if (
+        role == "citoyen"
+        and signalement.id_citoyen == current_user.id_utilisateur
+    ):
+        return signalement
+
+    raise HTTPException(
+        status_code=403,
+        detail="Vous n'êtes pas autorisé à consulter ce signalement"
+    )
 
 
 @router.put("/{signalement_id}", response_model=SignalementResponse)
